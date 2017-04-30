@@ -15,7 +15,7 @@ class AccountsTable extends Component {
     ))
 		return (
       <div id="accountsTable" className="appPanel">
-        <h2>Accounts Table</h2>
+        <h2>Accounts</h2>
         <ul>
           {Accounts}
         </ul>

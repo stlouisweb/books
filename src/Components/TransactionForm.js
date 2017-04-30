@@ -15,8 +15,8 @@ class TransactionForm extends Component {
 	}
 
 	render() {
-		let Accounts = this.props.accounts
-		Accounts.splice(0, 1)
+		let Accounts = this.props.accounts.filter(acct => acct.label !== "Cash")
+    //	Accounts.splice(0, 1)
 		let AccountOptions = Accounts.map((acct, i) => (
       <Option value={acct.label} label={acct.label} key={i.toString()} />
     ))
