@@ -34,3 +34,14 @@ li {
 li:nth-child(odd) {
   background: #dbdbdb;
 }
+#transactionForm label {
+  font-size: 18px;
+  line-height: 56px;
+}
+.mui-select__menu {
+  width: 340px;
+  height: 155px !important;
+  overflow-y: scroll;
+  left: -152px;
+  top: 0px !important;
+}
