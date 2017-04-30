@@ -9,8 +9,28 @@
   margin: 0px;
 }
 #accountsTable {
-  height: 380px;
+  height: 355px;
 }
 #transactionForm {
   height: 560px;
+}
+#stats {
+  height: 160px;
+}
+ul {
+  margin: 5px;
+  padding: 0px;
+  background: #fff;
+}
+li {
+  list-style: none;
+  font-weight: 900;
+  font-size: 15px;
+  line-height: 28px;
+  color: #717171;
+  padding: 0 10px;
+  letter-spacing: 1.5px;
+}
+li:nth-child(odd) {
+  background: #dbdbdb;
 }

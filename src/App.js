@@ -7,6 +7,7 @@ import Row from "muicss/lib/react/row";
 import Col from "muicss/lib/react/col";
 import TransactionForm from "./Components/TransactionForm.js";
 import AccountsTable from "./Components/AccountsTable.js";
+import Stats from "./Components/Stats.js";
 
 class App extends Component {
   constructor(props) {
@@ -41,6 +42,7 @@ class App extends Component {
   }
 
   render() {
+    const isLoading = this.state.loading;
     return (
       <div className="App">
         <Container fluid={true}>
@@ -49,7 +51,12 @@ class App extends Component {
               <TransactionForm accounts={this.state.accounts} />
             </Col>
             <Col xs="12" sm="6" style={{paddingLeft: "7px"}}>
-              <AccountsTable accounts={this.state.accounts} />
+              {isLoading
+                ? <p>Loading...</p>
+                : <AccountsTable accounts={this.state.accounts} />}
+            </Col>
+            <Col xs="12" sm="6" style={{paddingLeft: "7px"}}>
+              <Stats />
             </Col>
           </Row>
         </Container>
