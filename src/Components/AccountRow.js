@@ -15,6 +15,7 @@ class AccountRow extends Component {
 	}
 	updateInput(event) {
 		this.setState({value: event.target.value})
+		this.props.updateInput(event.target.value, this.props.rowKey)
 	}
 	getData() {
 		return this.state
