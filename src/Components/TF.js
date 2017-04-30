@@ -6,33 +6,14 @@ import Col from "muicss/lib/react/col"
 import Row from "muicss/lib/react/row"
 import Option from "muicss/lib/react/option"
 import Select from "muicss/lib/react/select"
-import AccountRow from "./AccountRow.js"
 
 class TransactionForm extends Component {
 	constructor(props) {
 		super(props)
-		this.state = {
-			accounts: 0,
-		}
-		this.handleInputChange = this.handleInputChange.bind(this)
-		this.handleAddAcctClick = this.handleAddAcctClick.bind(this)
+		this.state = {}
 	}
-	handleAddAcctClick(e) {
-		e.preventDefault()
-		var rows = this.state.accounts + 1
-		this.setState({accounts: rows})
-	}
-	handleInputChange(e) {
-		console.log(e)
-	}
-	render() {
-		let Accounts = this.props.accounts.filter(acct => acct.label !== "Cash")
-		let AcctLabels = Accounts.map(acct => acct.label)
-		let AccountRows = []
-		for (var i = 0; i < this.state.accounts; i++) {
-			AccountRows.push(<AccountRow options={AcctLabels} />)
-		}
 
+	render() {
 		return (
       <div id="transactionForm" className="appPanel">
         <h2>Add Transaction</h2>
@@ -48,7 +29,7 @@ class TransactionForm extends Component {
               <aside>Cash</aside>
             </Col>
           </Row>
-          {AccountRows}
+          {AcctRows}
           <div className="mui--clearfix" />
           <Button variant="raised" onClick={this.handleAddAcctClick}>
             Add Account
