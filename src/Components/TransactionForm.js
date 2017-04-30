@@ -1,37 +1,49 @@
-import React, {Component} from "react"
-import Form from "muicss/lib/react/form"
-import Input from "muicss/lib/react/input"
-import Button from "muicss/lib/react/button"
-import Col from "muicss/lib/react/col"
-import Row from "muicss/lib/react/row"
-import AccountRow from "./AccountRow.js"
+import React, {Component} from "react";
+import Form from "muicss/lib/react/form";
+import Input from "muicss/lib/react/input";
+import Button from "muicss/lib/react/button";
+import Col from "muicss/lib/react/col";
+import Row from "muicss/lib/react/row";
+import AccountRow from "./AccountRow.js";
 
 class TransactionForm extends Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			accounts: 0,
-		}
-		this.handleInputChange = this.handleInputChange.bind(this)
-		this.handleAddAcctClick = this.handleAddAcctClick.bind(this)
-	}
-	handleAddAcctClick(e) {
-		e.preventDefault()
-		var rows = this.state.accounts + 1
-		this.setState({accounts: rows})
-	}
-	handleInputChange(e) {
-		console.log(e)
-	}
-	render() {
-		let Accounts = this.props.accounts.filter(acct => acct.label !== "Cash")
-		let AcctLabels = Accounts.map(acct => acct.label)
-		let AccountRows = []
-		for (var i = 0; i < this.state.accounts; i++) {
-			AccountRows.push(<AccountRow options={AcctLabels} key={i.toString()} />)
-		}
+  constructor(props) {
+    super(props);
+    this.state = {
+      accounts: 0,
+    };
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleAddAcctClick = this.handleAddAcctClick.bind(this);
+    this.handleDeleteRow = this.handleDeleteRow.bind(this);
+  }
+  handleAddAcctClick(e) {
+    e.preventDefault();
+    var rows = this.state.accounts + 1;
+    this.setState({accounts: rows});
+  }
+  handleInputChange(e) {
+    console.log(e);
+  }
+  handleDeleteRow() {
+    console.log("delete row");
+    var rows = this.state.accounts - 1;
+    this.setState({accounts: rows});
+  }
+  render() {
+    let Accounts = this.props.accounts.filter(acct => acct.label !== "Cash");
+    let AcctLabels = Accounts.map(acct => acct.label);
+    let AccountRows = [];
+    for (var i = 0; i < this.state.accounts; i++) {
+      AccountRows.push(
+        <AccountRow
+          options={AcctLabels}
+          key={i.toString()}
+          deleteRow={this.handleDeleteRow}
+        />,
+      );
+    }
 
-		return (
+    return (
       <div id="transactionForm" className="appPanel">
         <h2>Add Transaction</h2>
         <Form style={{height: "450px", overflowY: "scroll"}}>
@@ -55,8 +67,8 @@ class TransactionForm extends Component {
           <Button variant="raised">Submit Transaction</Button>
         </Form>
       </div>
-		)
-	}
+    );
+  }
 }
 
-export default TransactionForm
+export default TransactionForm;

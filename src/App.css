@@ -48,3 +48,9 @@ li:nth-child(odd) {
 #transactionForm .mui-row {
   border-bottom: 1px solid #e6e2de;
 }
+.deleteRow {
+  font-size: 18px;
+line-height: 65px;
+color: #ceafaf;
+cursor: pointer;
+}

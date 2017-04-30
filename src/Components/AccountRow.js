@@ -12,13 +12,16 @@ class AccountRow extends Component {
     ))
 		return (
       <Row>
-        <Col md="5">
+        <Col md="4">
           <Input floatingLabel={true} label="Amount" />
         </Col>
-        <Col md="7">
+        <Col md="6">
           <Select>
             {AccountOptions}
           </Select>
+        </Col>
+        <Col md="2" className="mui--text-center">
+          <span className="deleteRow" onClick={this.props.deleteRow}>X</span>
         </Col>
       </Row>
 		)
