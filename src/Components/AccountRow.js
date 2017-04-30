@@ -21,7 +21,13 @@ class AccountRow extends Component {
           </Select>
         </Col>
         <Col md="2" className="mui--text-center">
-          <span className="deleteRow" onClick={this.props.deleteRow}>X</span>
+          <span
+            className="deleteRow"
+            id={this.props.rowKey}
+            onClick={this.props.deleteRow}
+          >
+            X
+          </span>
         </Col>
       </Row>
 		)

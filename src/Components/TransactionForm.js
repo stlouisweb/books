@@ -10,7 +10,8 @@ class TransactionForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      accounts: 0,
+      accounts: [],
+      counter: 0,
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleAddAcctClick = this.handleAddAcctClick.bind(this);
@@ -18,31 +19,58 @@ class TransactionForm extends Component {
   }
   handleAddAcctClick(e) {
     e.preventDefault();
-    var rows = this.state.accounts + 1;
-    this.setState({accounts: rows});
+    let Accounts = this.props.accounts.filter(acct => acct.label !== "Cash");
+    let AcctLabels = Accounts.map(acct => acct.label);
+    let counter = this.state.counter + 1;
+    let key = guid();
+    var rows = this.state.accounts;
+
+    function guid() {
+      function s4() {
+        return Math.floor((1 + Math.random()) * 0x10000)
+          .toString(16)
+          .substring(1);
+      }
+      return s4() +
+        s4() +
+        "-" +
+        s4() +
+        "-" +
+        s4() +
+        "-" +
+        s4() +
+        "-" +
+        s4() +
+        s4() +
+        s4();
+    }
+
+    rows.push(
+      <AccountRow
+        options={AcctLabels}
+        key={key}
+        rowKey={key}
+        deleteRow={this.handleDeleteRow}
+      />,
+    );
+    this.setState({accounts: rows, counter: counter});
   }
   handleInputChange(e) {
     console.log(e);
   }
-  handleDeleteRow() {
-    console.log("delete row");
-    var rows = this.state.accounts - 1;
-    this.setState({accounts: rows});
+  handleDeleteRow(event) {
+    console.log(event.target.id);
+    console.log(this.state.accounts);
+    let rows = this.state.accounts.filter(
+      acct => acct.props.rowKey !== event.target.id,
+    );
+    let counter = this.state.counter - 1;
+    this.setState({accounts: rows, counter: counter});
+
+    //var rows = this.state.accounts - 1;
+    //this.setState({accounts: rows});
   }
   render() {
-    let Accounts = this.props.accounts.filter(acct => acct.label !== "Cash");
-    let AcctLabels = Accounts.map(acct => acct.label);
-    let AccountRows = [];
-    for (var i = 0; i < this.state.accounts; i++) {
-      AccountRows.push(
-        <AccountRow
-          options={AcctLabels}
-          key={i.toString()}
-          deleteRow={this.handleDeleteRow}
-        />,
-      );
-    }
-
     return (
       <div id="transactionForm" className="appPanel">
         <h2>Add Transaction</h2>
@@ -58,7 +86,7 @@ class TransactionForm extends Component {
               <aside>Cash</aside>
             </Col>
           </Row>
-          {AccountRows}
+          {this.state.accounts}
           <div className="mui--clearfix" />
           <Button variant="raised" onClick={this.handleAddAcctClick}>
             Add Account
