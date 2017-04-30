@@ -13,10 +13,11 @@ class TransactionForm extends Component {
       accounts: [],
       counter: 0,
     };
-    this.handleInputChange = this.handleInputChange.bind(this);
     this.handleAddAcctClick = this.handleAddAcctClick.bind(this);
     this.handleDeleteRow = this.handleDeleteRow.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
+
   handleAddAcctClick(e) {
     e.preventDefault();
     let Accounts = this.props.accounts.filter(acct => acct.label !== "Cash");
@@ -51,16 +52,19 @@ class TransactionForm extends Component {
         key={key}
         rowKey={key}
         deleteRow={this.handleDeleteRow}
+        update={this.updateRow}
       />,
     );
     this.setState({accounts: rows, counter: counter});
   }
-  handleInputChange(e) {
-    console.log(e);
+  updateRow() {
+    console.log("updateRow");
+  }
+  handleSubmit(e) {
+    e.preventDefault();
+    this.state.accounts.forEach(row => console.log(row));
   }
   handleDeleteRow(event) {
-    console.log(event.target.id);
-    console.log(this.state.accounts);
     let rows = this.state.accounts.filter(
       acct => acct.props.rowKey !== event.target.id,
     );
@@ -69,6 +73,9 @@ class TransactionForm extends Component {
 
     //var rows = this.state.accounts - 1;
     //this.setState({accounts: rows});
+  }
+  updateInput(event) {
+    this.setState({value: event.target.value});
   }
   render() {
     return (
@@ -92,7 +99,9 @@ class TransactionForm extends Component {
             Add Account
           </Button>
           <Input floatingLabel={true} label="Description" />
-          <Button variant="raised">Submit Transaction</Button>
+          <Button variant="raised" onClick={this.handleSubmit}>
+            Submit Transaction
+          </Button>
         </Form>
       </div>
     );
