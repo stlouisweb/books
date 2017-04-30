@@ -7,7 +7,6 @@ import Select from "muicss/lib/react/select"
 
 class AccountRow extends Component {
 	render() {
-		console.log(this.props.options)
 		const AccountOptions = this.props.options.map((option, i) => (
       <Option value={option} label={option} key={i.toString()} />
     ))

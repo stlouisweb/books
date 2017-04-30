@@ -4,8 +4,6 @@ import Input from "muicss/lib/react/input"
 import Button from "muicss/lib/react/button"
 import Col from "muicss/lib/react/col"
 import Row from "muicss/lib/react/row"
-import Option from "muicss/lib/react/option"
-import Select from "muicss/lib/react/select"
 import AccountRow from "./AccountRow.js"
 
 class TransactionForm extends Component {
@@ -30,7 +28,7 @@ class TransactionForm extends Component {
 		let AcctLabels = Accounts.map(acct => acct.label)
 		let AccountRows = []
 		for (var i = 0; i < this.state.accounts; i++) {
-			AccountRows.push(<AccountRow options={AcctLabels} />)
+			AccountRows.push(<AccountRow options={AcctLabels} key={i.toString()} />)
 		}
 
 		return (
