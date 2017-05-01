@@ -51,7 +51,7 @@ class TransactionForm extends Component {
 
 		this.setState({accounts: rows, counter: counter})
 	}
-	updateRow(val, key) {
+	updateRow(val, key, option) {
 		console.log(val)
 		console.log(key)
 		let index = this.state.accounts.findIndex(acct => acct.key === key)
@@ -59,6 +59,10 @@ class TransactionForm extends Component {
 		let row = this.state.accounts[index]
 		console.log(row)
 		row.value = val
+		row.selectedOption = option
+		let accts = this.state.accounts
+		accts[index] = row
+		this.setState({accounts: accts})
 	}
 	handleSubmit(e) {
 		e.preventDefault()

@@ -1,30 +1,44 @@
-import React, {Component} from "react"
-import Col from "muicss/lib/react/col"
-import Row from "muicss/lib/react/row"
-import Input from "muicss/lib/react/input"
-import Option from "muicss/lib/react/option"
-import Select from "muicss/lib/react/select"
+import React, {Component} from "react";
+import Col from "muicss/lib/react/col";
+import Row from "muicss/lib/react/row";
+import Input from "muicss/lib/react/input";
+import Option from "muicss/lib/react/option";
+import Select from "muicss/lib/react/select";
 
 class AccountRow extends Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			value: "",
-		}
-		this.updateInput = this.updateInput.bind(this)
-	}
-	updateInput(event) {
-		this.setState({value: event.target.value})
-		this.props.updateInput(event.target.value, this.props.rowKey)
-	}
-	getData() {
-		return this.state
-	}
-	render() {
-		const AccountOptions = this.props.options.map((option, i) => (
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: "",
+      option: "Sales",
+    };
+    this.updateInput = this.updateInput.bind(this);
+    this.optionChange = this.optionChange.bind(this);
+  }
+  updateInput(event) {
+    this.setState({value: event.target.value});
+    this.props.updateInput(
+      event.target.value,
+      this.props.rowKey,
+      this.state.option,
+    );
+  }
+  getData() {
+    return this.state;
+  }
+  optionChange(event) {
+    this.setState({option: event.target.value});
+    this.props.updateInput(
+      this.state.value,
+      this.props.rowKey,
+      event.target.value,
+    );
+  }
+  render() {
+    const AccountOptions = this.props.options.map((option, i) => (
       <Option value={option} label={option} key={i.toString()} />
-    ))
-		return (
+    ));
+    return (
       <Row>
         <Col md="4">
           <Input
@@ -35,7 +49,7 @@ class AccountRow extends Component {
           />
         </Col>
         <Col md="6">
-          <Select>
+          <Select value={this.state.option} onChange={this.optionChange}>
             {AccountOptions}
           </Select>
         </Col>
@@ -49,8 +63,8 @@ class AccountRow extends Component {
           </span>
         </Col>
       </Row>
-		)
-	}
+    );
+  }
 }
 
-export default AccountRow
+export default AccountRow;
