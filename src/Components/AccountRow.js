@@ -23,9 +23,6 @@ class AccountRow extends Component {
       this.state.option,
     );
   }
-  getData() {
-    return this.state;
-  }
   optionChange(event) {
     this.setState({option: event.target.value});
     this.props.updateInput(
